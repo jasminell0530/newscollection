@@ -22,22 +22,52 @@
 # ───────────────────────────────────────────────────────────────
 # 在这里写入你不想看到的词，每行一个。
 # 包含这些词的新闻会被自动排除，不会出现在推送中。
-#
-# 使用方法：
-#   震惊              直接写词，包含"震惊"的新闻会被过滤
-#   /赌博|博彩/       用 /.../ 包裹可以匹配多个词（用 | 分隔）
-
 [GLOBAL_FILTER]
-# 过滤标题党
+广告
+推广
+营销
 震惊
+标题党             
 
+[WORD_GROUPS]
+科技
+AI
 
 
 # ───────────────────────────────────────────────────────────────
 #                        词组定义区
 # ───────────────────────────────────────────────────────────────
-# 在这里写入你想关注的关键词。
-# 每个词组用空行分隔，同一词组内的关键词是"或"的关系。
+字节跳动
+[大模型]
+ /阿里+千问|智谱+GLM - 5 |Gemini|Claude Opus 4.5|Google Gemini/
+
+Google+AI
+
+Gemini
+
+Openclaw
+
+杰弗里·辛顿
+
+马斯克
+
+OpenAI
+/特斯拉|马斯克|\bTesla\b|\bElon Musk\b|\bCybertruck\b|\bModel 3\b|\bModel Y\b|\bModel S\b|\bModel X\b|\bFSD\b/ => 特斯拉
+
+/英伟达|黄仁勋|\bNVIDIA\b|\bGeForce\b|\bRTX\b|\bCUDA\b|\bJensen Huang\b/ => 英伟达
+/苏姿丰|锐龙|霄龙|\bAMD\b|\bRyzen\b|\bEPYC\b|\bRadeon\b|\bLisa Su\b/ => AMD
+
+/微软|\bMicrosoft\b|\bWindows\b|\bAzure\b|\bSatya Nadella\b|\bCopilot\b/ => 微软
+/谷歌|皮查伊|安卓|油管|\bGoogle\b|\bAlphabet\b|\bAndroid\b|\bChrome\b|\bYouTube\b|\bGemini\b|\bDeepMind\b|\bWaymo\b/ => 谷歌
+
+[AI 相关]
+/(?<![a-zA-Z])ai(?![a-zA-Z])/
+人工智能
+
+[芯片]
+芯片
+光刻机
+半导体
 #
 # ┌─────────────────────────────────────────────────────────────┐
 # │                      语法总览（快速参考）                      │
