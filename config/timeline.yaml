@@ -9,7 +9,7 @@
 # 只需在 config.yaml 中选择一个预设模板即可：
 #
 #   schedule:
-#     preset: "morning_evening"    ← 改这里就行
+#     preset: "custom"    ← 改这里就行
 #
 #
 # 可视化配置编辑器地址: https://sansan0.github.io/TrendRadar/
@@ -104,7 +104,7 @@
 # ───────────────────────────────────────────────────────────────
 # 预设模板
 # ───────────────────────────────────────────────────────────────
-presets:
+presets:morning_evening
 
   # ───────────────────────────────────────────────────────────
   # 1️⃣ always_on - 全天候监控
@@ -389,8 +389,8 @@ presets:
 #     其余时间走默认配置（静默采集）
 
 custom:
-  name: "自定义"
-  description: "完全自由定义时间段、日计划和周映射。"
+  name: "每日晨间推送"
+  description: "仅在每天早上推送总结一次"
 
   # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   # 默认配置
@@ -401,13 +401,13 @@ custom:
   default:
     collect: true                  # 是否采集数据（爬取热榜 + RSS）
     analyze: false                 # 是否执行 AI 分析
-    ai_mode: "current"            # AI 分析模式:
+    ai_mode: "daily"            # AI 分析模式:
                                    #   follow_report → 跟随 report_mode
                                    #   daily         → 强制全天汇总
                                    #   current       → 强制当前榜单
                                    #   incremental   → 强制增量模式
-    push: false                    # 是否发送推送通知
-    report_mode: "current"         # 报告模式:
+    push: true                    # 是否发送推送通知
+    report_mode: "daily"         # 报告模式:
                                    #   daily       → 当日所有新闻的汇总
                                    #   current     → 当前在榜的新闻
                                    #   incremental → 只推送新增内容
