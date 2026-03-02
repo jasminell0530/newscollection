@@ -41,7 +41,7 @@ app:
 # ===============================================================
 schedule:
   enabled: true                         # 是否启用调度系统
-  preset: "morning_evening"             # 预设模板名称（见上方说明）
+  preset: "custom"             # 预设模板名称（见上方说明）
 
 
 # ===============================================================
@@ -154,6 +154,53 @@ platforms:
 # ===============================================================
 rss:
   enabled: true                       # 是否启用 RSS 抓取
+id: "decision lab"
+name: "decision lab"
+url: "https://thedecisionlab.com/feed/"
+
+id: "fsblog"
+name: "fsblog" 
+url: "https://fs.blog/feed/"
+
+id: "bigthink"
+name: "bigthink"
+url: "https://feeds.feedburner.com/bigthink/main"
+
+id: "geohot"
+name: "geohot"
+url: "https://geohot.github.io/blog/feed.xml"
+
+id: "techrun"
+name: "techrun"
+url: "https://techcrunch.com/startups/feed/"
+
+id: "Fastcode"
+name: "fastcode"
+url: "http://www.fastcodesign.com/rss.xml"
+
+id: "fastcompany"
+name: "fastcompany"
+url: "https://feeds2.feedburner.com/PennOlson"
+
+id: "hackernewsshowhn"
+name: "hackernewshn"
+url: "http://hnrss.org/show"
+
+id: "hackernewslaunches"
+name: "hackernewslaunches"
+url: "https://hnrss.org/launches"
+
+id: "machinelearning"
+name: "machinelearning"
+url: "https://blog.ml.cmu.edu/feed/"
+
+id: "deepmind"
+name: "deepmind"
+url: "https://deepmind.com/blog/feed/basic/"
+
+id: "mitnews"
+names: "MITnews"
+url: "http://news.mit.edu/rss/topic/artificial-intelligence2"
 
   # 文章新鲜度过滤配置（全局默认值）
   # 过滤掉发布时间超过指定天数的旧文章，避免同一篇文章重复出现在推送中
@@ -182,15 +229,11 @@ rss:
       url: "https://hnrss.org/frontpage"
       # max_age_days: 1               # 示例：只推送1天内的文章
 
-    - id: "ruanyifeng"
-      name: "阮一峰的网络日志"
-      url: "http://www.ruanyifeng.com/blog/atom.xml"
-      # max_age_days: 7               # 示例：推送7天内的文章（更新较慢的博客）
     
     - id: "yahoo-finance"
       name: "雅虎财经"
       url: "https://finance.yahoo.com/news/rssindex"
-      enabled: false                  # 禁用
+  
 
     # 自定义源示例
     # - id: "custom-feed"
@@ -275,7 +318,7 @@ display:
                                       # 关闭后跳过分析，但独立展示区不受影响
 
     standalone: false                 # 独立展示区（完整热榜/RSS，不受关键词过滤）
-    ai_analysis: true                 # AI 分析区域
+    ai_analysis: false                 # AI 分析区域
 
   # 📋 独立展示区配置
   # 用途：将指定平台的完整热榜/RSS 数据独立提取，不受关键词过滤影响
