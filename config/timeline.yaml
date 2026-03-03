@@ -388,44 +388,45 @@ presets:custom
 #     晚间汇总 19:00-21:00：推送 ✓ | 分析 ✓ | daily
 #     其余时间走默认配置（静默采集）
 
-custom:
-  name: "每日晨间推送"
-  description: "仅在每天早上推送总结一次"
+daily_10am_push:                     # 顶层配置名称（可自定义）
+  name: "每日十点推送"
+  description: "每天上午10点推送一次新闻舆情日报"
 
   default:
-  collect: true                # 全天持续采集新闻
-  analyze: false               # 默认不分析（仅在指定时段分析）
-  ai_mode: "current"           # 默认AI模式（实际被时段覆盖）
-  push: false                  # 默认不推送
-  report_mode: "current"       # 默认报告模式（实际被时段覆盖）
-  once:
-    analyze: true              # 每个时段只分析一次
-    push: true                 # 每个时段只推送一次
+    collect: true                     # 全天持续采集
+    analyze: false                    # 默认不分析
+    ai_mode: "current"                # 默认AI模式（会被时段覆盖）
+    push: false                       # 默认不推送
+    report_mode: "current"            # 默认报告模式（会被时段覆盖）
+    once:
+      analyze: true                   # 每个时段只分析一次
+      push: true                      # 每个时段只推送一次
 
-periods:
-  morning_push:
-    name: "上午十点推送"
-    start: "10:00"
-    end: "11:00"               # 设置1小时窗口，确保只触发一次
-    analyze: false             # 开启分析
-    ai_mode: "daily"           # 按日报模式分析（汇总前一天或当天的热点）
-    push: true                 # 开启推送
-    report_mode: "daily"       # 推送日报格式
+  periods:
+    morning_push:
+      name: "上午十点推送"
+      start: "15:00"
+      end: "16:00"                    # 1小时窗口，确保只触发一次
+      analyze: true                    # 开启分析
+      ai_mode: "daily"                 # 日报模式（汇总前一天/当天热点）
+      push: true                       # 开启推送
+      report_mode: "daily"             # 推送日报格式
+      # once 继承自 default → 只分析/推送一次
 
-day_plans:
-  daily_plan:
-    name: "每日计划"
-    periods:
-      - morning_push           # 仅包含上午推送时段
+  day_plans:
+    daily_plan:
+      name: "每日计划"
+      periods:
+        - morning_push                  # 仅包含这一个时段
 
-week_map:
-  mon: "daily_plan"
-  tue: "daily_plan"
-  wed: "daily_plan"
-  thu: "daily_plan"
-  fri: "daily_plan"
-  sat: "daily_plan"
-  sun: "daily_plan"
+  week_map:
+    mon: "daily_plan"
+    tue: "daily_plan"
+    wed: "daily_plan"
+    thu: "daily_plan"
+    fri: "daily_plan"
+    sat: "daily_plan"
+    sun: "daily_plan"
 
   # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   # 默认配置
