@@ -387,48 +387,58 @@ presets: “daily_10am_push”
 #     周末早间 10:00-12:00：推送 ✓ | daily
 #     晚间汇总 19:00-21:00：推送 ✓ | 分析 ✓ | daily
 #     其余时间走默认配置（静默采集）
+  # ───────────────────────────────────────────────────────────
+  # 每日定时推送 - 10点一次
+  #
+  # 仅在每天10:00-10:30 时间窗口内推送一次。
+  # 其他时间段不采集、不分析、不推送。
+  # 适合：需要定时汇总但不想被频繁打扰的用户
+  # ───────────────────────────────────────────────────────────
+  daily_10am_push:
+    name: "每日10点推送"
+    description: "每天10:00 仅推送一次当日热点汇总。"
 
-daily_10am_push:                     # 顶层配置名称（可自定义）
-  name: "每日十点推送"
-  description: "每天上午10点推送一次新闻舆情日报"
+    # 默认配置 ── 不在 10:00-10:30 时间段时的行为
+    default:
+      collect: true                # 全天采集（积累素材）
+      analyze: false               # 不做 AI 分析（节省成本）
+      ai_mode: "current"           # 占位符
+      push: false                  # ⚠️ 关键：非推送窗口不推送
+      report_mode: "current"       # 占位符
+      once:
+        analyze: false
+        push: false
 
-    # 默认配置 ── 不在任何时间段内时，使用这组开关
-    # 因为这个模式没有划分时间段，所以 default 就是全天的行为
-       default:
-    collect: true                     # 全天持续采集
-    analyze: false                    # 默认不分析
-    ai_mode: "current"                # 默认AI模式（会被时段覆盖）
-    push: false                       # 默认不推送
-    report_mode: "current"            # 默认报告模式（会被时段覆盖）
-    once:
-      analyze: true                   # 每个时段只分析一次
-      push: true                      # 每个时段只推送一次
-    
-  periods:
-    morning_push:
-      name: "上午十点推送"
-      start: "10:00"
-      end: "11:00"                    # 1小时窗口，确保只触发一次
-      analyze: true                    # 开启分析
-      ai_mode: "daily"                 # 日报模式（汇总前一天/当天热点）
-      push: true                       # 开启推送
-      report_mode: "daily"             # 推送日报格式
-      # once 继承自 default → 只分析/推送一次
+    # 时间段定义 ── 只在 10:00-10:30 时推送
+    periods:
+      morning_push:
+        name: "上午10点推送"
+        start: "10:00"
+        end: "10:30"
+        collect: true              # 继续采集
+        analyze: false              # 10点时做一次 AI 分析
+        ai_mode: "daily"           # 汇总全天内容
+        push: true                 # 推送
+        report_mode: "daily"       # 推送当日全部新闻
+        once:
+          analyze: true           # ⚠️ 窗口内仅分析一次
+          push: true               # ⚠️ 窗口内仅推送一次
 
+    # 日计划 ── 每天都启用 morning_push 时间段
+    day_plans:
+      all_day:
+        periods: ["morning_push"]
 
-    daily_plan:
-      name: "每日计划"
-      periods:
-       day_plans:[ "morning_push"]                  # 仅包含这一个时段
+    # 周映射 ── 全周都适用（1=周一 ... 7=周日）
+    week_map:
+      1: "all_day"                 # 周一
+      2: "all_day"                 # 周二
+      3: "all_day"                 # 周三
+      4: "all_day"                 # 周四
+      5: "all_day"                 # 周五
+      6: "all_day"                 # 周六
+      7: "all_day"                 # 周日
 
-  week_map:
-    1: "daily_plan"
-    2: "daily_plan"
-    3: "daily_plan"
-    4: "daily_plan"
-    5: "daily_plan"
-    6: "daily_plan"
-    7: "daily_plan"
 
   # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   # 默认配置
