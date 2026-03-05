@@ -55,19 +55,19 @@ schedule:
 platforms:
   enabled: true                         # 是否启用热榜平台抓取
   sources:
-     id: "toutiao"
+     - id: "toutiao"
       name: "今日头条"
-     id: "baidu"
+     - id: "baidu"
       name: "百度热搜"
-     id: "wallstreetcn-hot"
+     - id: "wallstreetcn-hot"
       name: "华尔街见闻"
-     id: "thepaper"
+     - id: "thepaper"
       name: "澎湃新闻"
-     id: "bilibili-hot-search"
+    - id: "bilibili-hot-search"
       name: "bilibili 热搜"
-     id: "cls-hot"
+     - id: "cls-hot"
       name: "财联社热门"
-     id: "ifeng"
+     - id: "ifeng"
       name: "凤凰网"
     - id: "tieba"
       name: "贴吧"
@@ -76,7 +76,6 @@ platforms:
     - id: "douyin"
       name: "抖音"
     # name 可以定义任意名称，只具有显示作用，即使项目运行了几天后，忽然改掉 name 也不会影响代码的正常运行
-platforms:
   
   # === 综合新闻媒体类 ===
   - id: "toutiao"
@@ -153,8 +152,9 @@ platforms:
 # max_age_days: 可选，覆盖全局 freshness_filter.max_age_days
 # ===============================================================
 rss:
-  enabled: true                       # 是否启用 RSS 抓取
-id: "decision lab"
+  enabled: true  
+    feeds:
+ - id: "decisionlab"
 name: "decision lab"
 url: "https://thedecisionlab.com/feed/"
 
@@ -245,9 +245,7 @@ url: "http://news.mit.edu/rss/topic/artificial-intelligence2"
 
 # ===============================================================
 # 4. 报告模式
-report:
-  sort_by_position_first: true   # 按配置顺序优先
-  max_news_per_keyword: 5       # 全局默认每个关键词最多10条
+
 # 🔸 daily（当日汇总模式）
 #    • 推送时机：按时推送(默认每小时推送一次)
 #    • 显示内容：当日所有匹配新闻 + 新增新闻区域
@@ -361,7 +359,7 @@ notification:
   # 推送渠道配置
   channels:
     feishu:
-      webhook_url: ""                 # 飞书机器人 webhook URL
+      webhook_url: "${{ secrets.FEISHU_WEBHOOK }}"                 # 飞书机器人 webhook URL
 
     dingtalk:
       webhook_url: ""                 # 钉钉机器人 webhook URL
